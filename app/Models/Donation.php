@@ -21,8 +21,13 @@ class Donation extends Model
         'description',
         'estimated_amount',
         'deadline',
+        'user_id',
+        'status'
     ];
 
+    protected $with = [
+        'user',
+    ];
     public function user()
     {
         return $this->belongsTo(User::class);
