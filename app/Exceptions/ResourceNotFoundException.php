@@ -10,7 +10,6 @@ class ResourceNotFoundException extends \Exception
     {
         parent::__construct($message, $code, $previous);
     }
-
     /**
      * Register the exception handling callbacks for the application.
      *
