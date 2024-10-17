@@ -22,7 +22,8 @@ class Donation extends Model
         'estimated_amount',
         'deadline',
         'user_id',
-        'status'
+        'status',
+        'category'
     ];
 
     protected $with = [

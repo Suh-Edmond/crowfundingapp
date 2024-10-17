@@ -3,7 +3,7 @@
 use App\Http\Controllers\Auth\AuthenticationController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\DonationController;
-use Illuminate\Support\Facades\Request;
+use App\Http\Controllers\UserDonationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,7 +35,9 @@ Route::middleware('auth:sanctum')->group( function () {
         Route::get('/user/donations', [DonationController::class, 'getUserDonations'])->name('api.getUserDonations');
         Route::post('user/donations/create', [DonationController::class, 'createDonation'])->name('api.createDonation');
         Route::get('/user/donations/{id}', [DonationController::class, 'showDonation'])->name('api.showDonation');
-        Route::put('user/donations/{id}/update', [DonationController::class, 'updateDonation'])->name('api.updateDonation');
+        Route::put('/user/donations/{id}/update', [DonationController::class, 'updateDonation'])->name('api.updateDonation');
+        Route::post('/donations/add_contribute', [UserDonationController::class, 'addDonation'])->name('api.addDonation');
+        Route::get('/donations/{id}/contributions', [UserDonationController::class, 'getUserDonationsById'])->name('api.getUserDonationsById');
     });
 
 });

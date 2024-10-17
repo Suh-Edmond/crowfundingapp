@@ -16,6 +16,10 @@ class UserDonation extends Model
     public $incrementing  = false;
     protected $keyType    = 'string';
 
+    protected $with = [
+        'user',
+        'donation'
+    ];
     protected $fillable = [
         'amount_given',
         'user_id',

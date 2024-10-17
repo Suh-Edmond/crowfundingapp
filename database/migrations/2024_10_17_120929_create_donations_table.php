@@ -1,5 +1,7 @@
 <?php
 
+use App\Constants\DonationCategory;
+use App\Constants\DonationStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,8 +18,9 @@ return new class extends Migration
             $table->string('title');
             $table->mediumText('description');
             $table->double('estimated_amount');
-            $table->enum('status', ['INCOMPLETE', 'COMPLETE'])->default('INCOMPLETE');
+            $table->enum('status', [DonationStatus::INCOMPLETE, DonationStatus::COMPLETE])->default(DonationStatus::INCOMPLETE);
             $table->timestamp('deadline');
+            $table->enum('category', [DonationCategory::HUMANITARIAN, DonationCategory::REFUGEE, DonationCategory::EVANGELISM]);
             $table->uuid('user_id');
             $table->timestamps();
 

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Constants\Constant;
+use App\Constants\DonationStatus;
 use App\Exceptions\UnAuthorizedException;
 use App\Http\Resources\DonationResource;
 use App\interfaces\DonationInterface;
@@ -19,8 +20,9 @@ class DonationService implements DonationInterface
             'description'       => $request->description,
             'estimated_amount'  => $request->estimated_amount,
             'user_id'           => $user->id,
-            'status'            => Constant::INCOMPLETE,
-            'deadline'          => $request->deadline
+            'status'            => DonationStatus::INCOMPLETE,
+            'deadline'          => $request->deadline,
+            'category'          => $request->category
         ]);
 
         return new DonationResource($created);
@@ -31,7 +33,7 @@ class DonationService implements DonationInterface
         $donation = Donation::findOrFail($id);
         $user = auth()->user();
         if ($donation->user->id != $user->id){
-            throw new UnAuthorizedException("Unauthorized! Cannot update this donation", 403);
+            throw new UnAuthorizedException(Constant::UNAUTHORIZED_CAN_NOT_DONATE, 403);
         }
         $donation->update([
             'title'         => $request->title,
