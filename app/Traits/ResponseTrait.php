@@ -18,15 +18,16 @@ trait ResponseTrait
     }
 
 
-    public static function sendResponse($result, $message)
+    public static function sendResponse($result, $message, $code)
     {
         $response = [
             'success' => true,
             'data'    => $result,
             'message' => $message,
+            'code'    => $code
         ];
 
 
-        return response()->json($response, 200);
+        return response()->json($response);
     }
 }
