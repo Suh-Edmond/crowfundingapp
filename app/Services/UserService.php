@@ -20,8 +20,6 @@ class UserService implements UserInterface
             'telephone' => $request->telephone,
             'password' => Hash::make($request->password)
         ]);
-
-
         event(new Registered($user));
     }
 

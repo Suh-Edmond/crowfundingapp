@@ -6,5 +6,5 @@ interface UserDonationInterface
 {
     public function addDonation($request);
 
-    public function getAllUsersDonationsByDonationId($id);
+    public function getAllUsersDonationsByDonationId($id, $request);
 }

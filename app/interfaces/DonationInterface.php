@@ -8,7 +8,7 @@ interface DonationInterface
 
     public function updateDonation($request, $id);
 
-    public function fetchAllDonations();
+    public function fetchAllDonations($request);
 
     public function showDonation($id);
 
