@@ -25,7 +25,8 @@ class CreateDonationRequest extends FormRequest
             'title' => 'required|string|max:255|unique:donations,title',
             'description' => 'required|max:1000',
             'estimated_amount' => 'required|numeric|min:1000',
-            'deadline' => 'required|after_or_equal:now'
+            'deadline' => 'required|after_or_equal:now',
+            'category' => 'required'
         ];
     }
 }

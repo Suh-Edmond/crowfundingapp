@@ -24,7 +24,8 @@ class UpdateDonationRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'description' => 'required|max:1000',
-            'deadline' => 'required|after_or_equal:now'
+            'deadline' => 'required|after_or_equal:now',
+            'category' => 'required'
         ];
     }
 }

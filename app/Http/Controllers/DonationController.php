@@ -19,7 +19,6 @@ class DonationController extends Controller
         $this->donationService = $donationService;
     }
 
-
     public function createDonation(CreateDonationRequest $request)
     {
         $data = $this->donationService->createDonation($request);
@@ -42,9 +41,9 @@ class DonationController extends Controller
     }
 
 
-    public function getAllDonations()
+    public function getAllDonations(Request $request)
     {
-        $data = $this->donationService->fetchAllDonations();
+        $data = $this->donationService->fetchAllDonations($request);
 
         return $this->sendResponse($data, "success", 200);
     }

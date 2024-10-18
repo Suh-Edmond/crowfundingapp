@@ -38,15 +38,16 @@ class DonationService implements DonationInterface
         $donation->update([
             'title'         => $request->title,
             'description'   => $request->description,
-            'deadline'      => $request->deadline
+            'deadline'      => $request->deadline,
+            'category'      => $request->category
         ]);
 
         return new DonationResource($donation);
     }
 
-    public function fetchAllDonations()
+    public function fetchAllDonations($request)
     {
-        return DonationResource::collection(Donation::all());
+        return Donation::paginate($request->per_page ?? 10);
     }
 
     public function showDonation($id)
