@@ -47,7 +47,7 @@ class DonationService implements DonationInterface
 
     public function fetchAllDonations($request)
     {
-        return Donation::paginate($request->per_page ?? 10);
+        return Donation::orderBy("created_at", "desc")->paginate($request->per_page ?? 10);
     }
 
     public function showDonation($id)

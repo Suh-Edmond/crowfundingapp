@@ -8,7 +8,6 @@ use App\Models\Donation;
 use App\Models\User;
 use App\Models\UserDonation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 

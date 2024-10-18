@@ -20,16 +20,18 @@ Route::prefix('public/auth')->group(function () {
     Route::post('/login', [AuthenticationController::class, 'loginUser'])->name('api.login');
     Route::post('/create_account', [AuthenticationController::class, 'createAccount'])->name('api.createAccount');
     Route::get('/email/verify/{id}/{hash}', [VerifyEmailController::class, '__invoke'])->middleware(['signed', 'throttle:6,1'])->name('verification.verify');
-    Route::post('/email/verification-notification', [VerifyEmailController::class, 'resendVerification'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
 });
 Route::prefix('public')->group(function (){
    Route::get('/donations', [DonationController::class, 'getAllDonations'])->name('api.getAllDonations');
 });
 
-Route::middleware('auth:sanctum')->group( function () {
+Route::middleware(['auth:sanctum', 'verified'])->group( function () {
      Route::prefix('protected')->group(function (){
          Route::post('/auth/logout', [AuthenticationController::class, 'logout'])->name('api.logout');
+         Route::post('/email/verification-notification', [VerifyEmailController::class, 'resendVerification'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
      });
+
 
     Route::prefix('protected')->group(function (){
         Route::get('/user/donations', [DonationController::class, 'getUserDonations'])->name('api.getUserDonations');

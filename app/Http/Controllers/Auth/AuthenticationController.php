@@ -19,13 +19,24 @@ class AuthenticationController extends Controller
         $this->userService = $userService;
     }
 
+    /**
+     * Create user account
+     * @param RegisterRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function createAccount(RegisterRequest $request)
     {
         $this->userService->createAccount($request);
 
-        return $this->sendResponse(null,  "Account created Successfully", 204);
+        return $this->sendResponse(null,  "Account created Successfully! Check your mailbox to verify this account", 204);
     }
 
+    /**
+     *  Login user to account
+     * @param LoginRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \App\Exceptions\UnAuthorizedException
+     */
     public function loginUser(LoginRequest $request)
     {
         $data = $this->userService->login($request);
@@ -33,6 +44,11 @@ class AuthenticationController extends Controller
         return $this->sendResponse($data, "Login was successful", 200);
     }
 
+    /**
+     * Logout user
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function logout(Request $request)
     {
         $this->userService->logout($request);
