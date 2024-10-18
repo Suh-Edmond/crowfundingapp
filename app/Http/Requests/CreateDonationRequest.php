@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Constants\DonationCategory;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreateDonationRequest extends FormRequest
 {
@@ -15,9 +17,8 @@ class CreateDonationRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * dealine must be a valid date and must be after the current date e,g 2024-12-01 19:00:00
+     * @return string[]
      */
     public function rules(): array
     {
@@ -26,7 +27,7 @@ class CreateDonationRequest extends FormRequest
             'description' => 'required|max:1000',
             'estimated_amount' => 'required|numeric|min:1000',
             'deadline' => 'required|after_or_equal:now',
-            'category' => 'required'
+            'category' => ['required', Rule::in([DonationCategory::REFUGEE, DonationCategory::EVANGELISM, DonationCategory::HUMANITARIAN]),]
         ];
     }
 }

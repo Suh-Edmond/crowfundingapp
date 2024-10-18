@@ -26,6 +26,7 @@ class UserDonation extends Model
         'donation_id'
     ];
 
+
     public function user()
     {
         return $this->belongsTo(User::class);

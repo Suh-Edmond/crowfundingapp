@@ -19,6 +19,11 @@ class DonationController extends Controller
         $this->donationService = $donationService;
     }
 
+    /**
+     *  Create a community donation
+     * @param CreateDonationRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function createDonation(CreateDonationRequest $request)
     {
         $data = $this->donationService->createDonation($request);
@@ -26,6 +31,13 @@ class DonationController extends Controller
         return $this->sendResponse($data, "Donation created successfully", 200);
     }
 
+    /**
+     * Update a created community donation
+     * @param $id
+     * @param UpdateDonationRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \App\Exceptions\UnAuthorizedException
+     */
     public function updateDonation($id, UpdateDonationRequest $request)
     {
         $data = $this->donationService->updateDonation($request, $id);
@@ -33,6 +45,11 @@ class DonationController extends Controller
         return $this->sendResponse($data, "Donation updated successfully", 200);
     }
 
+    /**
+     * Show a community donation
+     * @param $id
+     * @return \App\Http\Resources\DonationResource
+     */
     public function showDonation($id)
     {
         $data = $this->donationService->showDonation($id);
@@ -41,6 +58,11 @@ class DonationController extends Controller
     }
 
 
+    /**
+     *  Fetch all community donations
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getAllDonations(Request $request)
     {
         $data = $this->donationService->fetchAllDonations($request);
@@ -48,6 +70,10 @@ class DonationController extends Controller
         return $this->sendResponse($data, "success", 200);
     }
 
+    /**
+     * Fetch all donations belonging to the current authenticated user.
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getUserDonations()
     {
         $data = $this->donationService->getUserDonations();
