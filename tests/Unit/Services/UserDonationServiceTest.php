@@ -14,6 +14,7 @@ use App\Models\UserDonation;
 use App\Services\UserDonationService;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Mockery\MockInterface;
 use Tests\TestCase;
@@ -192,8 +193,8 @@ class UserDonationServiceTest extends TestCase
         $this->expectException(ResourceNotFoundException::class);
         $this->expectExceptionMessage(Constant::DONATION_NOT_FOUND);
         $this->expectExceptionCode(404);
-
-        $this->userDonationService->getAllUsersDonationsByDonationId($id);
+        $request = new Request();
+        $this->userDonationService->getAllUsersDonationsByDonationId($id, $request);
     }
 
     public function test_getAllUsersDonationsByDonationId_returns_unauthorized_when_user_donation_exist_and_does_not_belong_user():void {
@@ -213,6 +214,7 @@ class UserDonationServiceTest extends TestCase
             'status' => DonationStatus::INCOMPLETE,
             'category' => DonationCategory::EVANGELISM
         ]);
+        $request = new Request();
 
         $mock = $this->mock(UserDonation::class, function (MockInterface $mock){
             $mock->shouldReceive('find')->andReturn($this->donation);
@@ -223,7 +225,7 @@ class UserDonationServiceTest extends TestCase
         $this->expectExceptionMessage(Constant::DONATION_DOES_NOT_BELONG_THIS_USER);
         $this->expectExceptionCode(403);
 
-        $this->userDonationService->getAllUsersDonationsByDonationId($this->donation->id);
+        $this->userDonationService->getAllUsersDonationsByDonationId($this->donation->id, $request);
     }
 
     public function test_getAllUsersDonationsByDonationId_returns_all_user_donations():void {
@@ -238,6 +240,8 @@ class UserDonationServiceTest extends TestCase
             'category'          => DonationCategory::EVANGELISM
         ]);
 
+        $request = new Request();
+
         $contribution = UserDonation::create([
             'donation_id' => $this->donation->id,
             'user_id'      => $this->user->id,
@@ -249,24 +253,23 @@ class UserDonationServiceTest extends TestCase
         });
         $mock->find();
 
-        $data = $this->userDonationService->getAllUsersDonationsByDonationId($this->donation->id);
+        $data = $this->userDonationService->getAllUsersDonationsByDonationId($this->donation->id, $request);
 
-        $response = json_decode($data->response()->content());
 
-        self::assertCount(1, $response->data);
-        self::assertEquals($contribution->donation_id, $response->data[0]->donation_id);
-        self::assertEquals($contribution->user_id, $response->data[0]->user_id);
-        self::assertEquals($contribution->amount_given, $response->data[0]->amount_given);
+        self::assertEquals(1, $data->total());
+        self::assertEquals($contribution->donation_id, $data->items()[0]->donation_id);
+        self::assertEquals($contribution->user_id, $data->items()[0]->user_id);
+        self::assertEquals($contribution->amount_given, $data->items()[0]->amount_given);
 
-        self::assertEquals($this->donation->title, $response->data[0]->donation->title);
-        self::assertEquals($this->donation->description, $response->data[0]->donation->description);
-        self::assertEquals($this->donation->deadline, $response->data[0]->donation->deadline);
-        self::assertEquals($this->donation->status, $response->data[0]->donation->status);
-        self::assertEquals($this->donation->category, $response->data[0]->donation->category);
+        self::assertEquals($this->donation->title,$data->items()[0]->donation->title);
+        self::assertEquals($this->donation->description, $data->items()[0]->donation->description);
+        self::assertEquals($this->donation->deadline, $data->items()[0]->donation->deadline);
+        self::assertEquals($this->donation->status, $data->items()[0]->donation->status);
+        self::assertEquals($this->donation->category, $data->items()[0]->donation->category);
 
-        self::assertEquals($this->user->name, $response->data[0]->user->name);
-        self::assertEquals($this->user->email, $response->data[0]->user->email);
-        self::assertEquals($this->user->telephone, $response->data[0]->user->telephone);
+        self::assertEquals($this->user->name, $data->items()[0]->user->name);
+        self::assertEquals($this->user->email, $data->items()[0]->user->email);
+        self::assertEquals($this->user->telephone, $data->items()[0]->user->telephone);
     }
 
 }

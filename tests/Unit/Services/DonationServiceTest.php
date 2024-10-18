@@ -181,19 +181,17 @@ class DonationServiceTest extends TestCase
 
         $mock->all();
 
-        $data = $this->donationService->fetchAllDonations();
+        $data = $this->donationService->fetchAllDonations(10);
 
-        $response = json_decode($data->response()->content());
-
-        $this->assertCount(1, $response->data);
-        $this->assertEquals($response->data[0]->title, $donation->title);
-        $this->assertEquals($response->data[0]->description, $donation->description);
-        $this->assertEquals($response->data[0]->deadline, $donation->deadline);
-        $this->assertEquals($response->data[0]->category, $donation->category);
-        $this->assertEquals($response->data[0]->user_id, $donation->user_id);
-        $this->assertEquals($response->data[0]->status, $donation->status);
-        $this->assertEquals($response->data[0]->user->name, $donation->user->name);
-        $this->assertEquals($response->data[0]->user->email, $donation->user->email);
+        $this->assertEquals(1, $data->total());
+        $this->assertEquals($data->items()[0]->title, $donation->title);
+        $this->assertEquals($data->items()[0]->description, $donation->description);
+        $this->assertEquals($data->items()[0]->deadline, $donation->deadline);
+        $this->assertEquals($data->items()[0]->category, $donation->category);
+        $this->assertEquals($data->items()[0]->user_id, $donation->user_id);
+        $this->assertEquals($data->items()[0]->status, $donation->status);
+        $this->assertEquals($data->items()[0]->user->name, $donation->user->name);
+        $this->assertEquals($data->items()[0]->user->email, $donation->user->email);
     }
 
     public function test_showDonation_returns_not_found_when_donation_not_exist():void {
