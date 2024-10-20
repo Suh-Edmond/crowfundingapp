@@ -28,7 +28,7 @@ You can run the application as a docker container using docker-compose, pull the
 - Generate the app key by running `php artisan key: generate`
 - Setup your database connection in your *.env* file
 - Run the migration using the command `php artisan migrate`
-- Serve the application using `php artisan serve` and visit **http://localhost:8000/docs/api** (API Documentation)
+- Serve the application using `php artisan serve` and visit **http://localhost:8000/docs/api** for the API documentation
 
 #### Run the app using docker-compose
 The docker setup provides the following services
@@ -43,11 +43,11 @@ The docker setup provides the following services
 - ***Provide your mail server configs in .env.To access any protected endpoint, you must first verify your account. Please note that login will not be successful until your account is verified.***
 - Run `docker-compose build`
 - Run `docker-compose up`
-- Visit **http://localhost/docs/api**(API documentation) or **your_ip_address/docs/api**(API documentation)
+- Visit **http://localhost/docs/api** or **your_ip_address/docs/api** for the API documentation
 
 #### Run the app using the image
 - Run `docker run -d -p 8000:80 suheddy/crowdfundapp:0.01`
-- Visit **http://localhost:8000/docs/api**(API Documentation) or **your_ip_address/docs/api**(API Documentation)
+- Visit **http://localhost:8000/docs/api**  or **your_ip_address/docs/api** 
 
 ### Run test
 - Run `php artisan test`
