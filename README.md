@@ -12,7 +12,7 @@ This application allows people in need to receive money from anyone interested i
 
 ### Packages/Tools
 - Laravel Sanctum
-- Scramble API documentation [https://scramble.dedoc.co](#Scramble API documentation).
+- Scramble API documentation [https://scramble.dedoc.co] (Scramble API documentation).
 - Docker/ Docker Compose
 
 ### Server requirements
@@ -40,7 +40,7 @@ The docker setup provides the following services
 ##### Steps to install
 - Clone or download the project using the link, the latest code is on the *master* branch
 - Run `cp .env.example .env`
-- ## Provide your mail server configs in .env. Because all accounts created must be verified before a login can be successful, and you will not be able to access any protected endpoint without login.
+- *** Provide your mail server configs in .env. Because all accounts created must be verified before a login can be successful, and you will not be able to access any protected endpoint without login.***
   Please reach out to me if any issue
 - Run `docker-compose build`
 - Run `docker-compose up`
