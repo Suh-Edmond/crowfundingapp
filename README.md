@@ -1,66 +1,54 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+### Crowd Fund RESTful Service
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This application allows people in need to receive money from anyone interested in donating to the needy
 
-## About Laravel
+### Features
+- Authentication
+- Donation Management
+- Donation Collection
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Framework
+- Laravel 10.0
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Packages/Tools
+- Laravel Sanctum
+- Scramble API documentation [https://scramble.dedoc.co](#Scramble API documentation).
+- Docker/ Docker Compose
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Server requirements
+- PHP 8.2
+- MySQL
 
-## Learning Laravel
+### How to Run Application
+You can run the application as a docker container using docker-compose, pull the base image from my hub, or run it as a normal laravel app. Either way works
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+A #### Run app locally
+- Clone the project using the link, the latest code is on the *master* branch
+- Open it in your favourite IDE and run Composer install
+- Generate the app key by running `php artisan key: generate`
+- Setup your database connection in your *.env* file
+- Run the migration using the command `php artisan migrate`
+- Serve the application using `php artisan serve` and visit [localhost:8000/docs/api](API Documentation)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+B #### Run the app using docker-compose
+The docker setup provides the following services
+- Nginx
+- PHP 8.2 app
+- MySQL's latest version
+- PhpmyAdmin:5.2.1-apache
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+##### Steps to install
+- Clone or download the project using the link, the latest code is on the *master* branch
+- Run `cp .env.example .env`
+- ## Provide your mail server configs in .env. Because all accounts created must be verified before a login can be successful, and you will not be able to access any protected endpoint without login.
+  Please reach out to me if any issue
+- Run `docker-compose build`
+- Run `docker-compose up`
+- Visit [localhost/docs/api](API documentation) or [your_ip_address/docs/api](API documentation)
 
-## Laravel Sponsors
+C #### Run the app using the image
+- Run `docker run -d -p 8000:80 suheddy/crowdfundapp:0.01`
+- Visit [localhost:8000/docs/api](API Documentation) or [your_ip_address/docs/api](API Documentation)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Run test
+- Run `php artisan test`
