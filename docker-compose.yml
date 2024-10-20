@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+
+# Laravel app
+    crowdfund_app:
+        build:
+            args:
+                user: crowdfund_user
+                uid: 1000
+            context: ./
+            dockerfile: Dockerfile
+        platform: linux/amd64
+        image: crowdfund_app_image
+        container_name: crowdfund_app_container
+        restart: unless-stopped
+        working_dir: /var/www
+        depends_on:
+            - crowdfund_mysql
+        volumes:
+            - ./:/var/www
+        networks:
+            - crowdfund_network
+
+# Nginx Service
+    crownfund_nginx:
+        platform: linux/amd64
+        image: nginx:alpine
+        container_name: crowdfund_nginx
+        restart: unless-stopped
+        ports:
+            - "80:80"
+        depends_on:
+            - crowdfund_app
+        volumes:
+            - ./:/var/www
+            - ./docker-compose/nginx/:/etc/nginx/conf.d
+        networks:
+            - crowdfund_network
+
+# MySQL Service
+    crowdfund_mysql:
+        platform: linux/amd64
+        image: mysql:latest
+        container_name: crowdfund_mysql
+        restart: unless-stopped
+        ports:
+            - "3337:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_USER: ${DB_USER}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+        networks:
+            - crowdfund_network
+        volumes:
+            -   crowdfund_mysql_data:/var/lib/mysql
+            -   ./docker-compose/mysql/my.cnf:/etc/mysql/my.cnf
+
+# phpMyAdmin Service
+    crowdfund_phpmyadmin:
+        image: phpmyadmin:5.2.1-apache
+        container_name: crowdfund_phpmyadmin
+        restart: unless-stopped
+        ports:
+            - "8383:80"
+        environment:
+            PMA_HOST: crowdfund_mysql
+            PMA_PORT: 3306
+            PMA_USER: ${PHP_MY_ADMIN_USER}
+            PMA_PASSWORD: ${DB_PASSWORD}
+        depends_on:
+            - crowdfund_mysql
+        networks:
+            - crowdfund_network
+
+networks:
+    crowdfund_network:
+        driver: bridge
+volumes:
+    crowdfund_mysql_data:
+        driver: local

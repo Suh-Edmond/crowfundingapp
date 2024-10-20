@@ -6,6 +6,7 @@ use App\Constants\Constant;
 use App\Constants\DonationStatus;
 use App\Exceptions\BusinessValidationException;
 use App\Exceptions\ResourceNotFoundException;
+use App\Http\Resources\UserDonationResourceCollection;
 use App\Http\Resources\UserDonationsResource;
 use App\interfaces\UserDonationInterface;
 use App\Models\Donation;
@@ -48,7 +49,10 @@ class UserDonationService implements UserDonationInterface
         if($donation->user_id != $user->id){
             throw new BusinessValidationException(Constant::DONATION_DOES_NOT_BELONG_THIS_USER, 403);
         }
-        return $this->getDonationsById($id)->paginate($request->per_page ?? 10);
+        $paginatedData = $this->getDonationsById($id)->paginate($request->per_page ?? 10);
+
+        return new UserDonationResourceCollection($paginatedData, $paginatedData->total(),
+            $paginatedData->currentPage(), $paginatedData->lastPage(),$paginatedData->perPage(), $this->computeTotalAmountGivenByDonation($donation));
     }
 
     private function getDonationsById($id)
@@ -56,16 +60,16 @@ class UserDonationService implements UserDonationInterface
         return UserDonation::where('donation_id', $id);
     }
 
-    private function computeTotalAmountGivenByDonation($id)
+    private function computeTotalAmountGivenByDonation($donation)
     {
-        return collect($this->getDonationsById($id)->get())->map(function ($ele) {
+        return collect($donation->userDonations)->map(function ($ele) {
             return $ele->amount_given;
         })->sum();
     }
 
     private function updateDonationStatus($donation)
     {
-        if($donation->estimated_amount == $this->computeTotalAmountGivenByDonation($donation->id)){
+        if($this->computeTotalAmountGivenByDonation($donation) >= $donation->estimated_amount){
             $donation->update([
                 'status' => DonationStatus::COMPLETE
             ]);

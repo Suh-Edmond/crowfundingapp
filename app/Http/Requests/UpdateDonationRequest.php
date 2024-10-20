@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Constants\DonationCategory;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateDonationRequest extends FormRequest
 {
@@ -25,7 +27,7 @@ class UpdateDonationRequest extends FormRequest
             'title' => 'required|string|max:255',
             'description' => 'required|max:1000',
             'deadline' => 'required|after_or_equal:now',
-            'category' => 'required'
+            'category' => ['required', Rule::in([DonationCategory::REFUGEE, DonationCategory::EVANGELISM, DonationCategory::HUMANITARIAN]),]
         ];
     }
 }
