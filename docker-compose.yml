@@ -14,6 +14,7 @@ services:
         image: crowdfund_app_image
         container_name: crowdfund_app_container
         restart: unless-stopped
+        working_dir: /var/www
         depends_on:
             - crowdfund_mysql
         volumes:
