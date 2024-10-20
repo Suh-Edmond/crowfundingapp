@@ -46,7 +46,7 @@ The docker setup provides the following services
 - Visit **http://localhost/docs/api** or **your_ip_address/docs/api** for the API documentation
 
 #### Run the app using the image
-- Run `docker run -d -p 8000:80 suheddy/crowdfundapp:0.01`
+- Run `docker run -d -p 8000:80 suheddy/crowfundapp:0.01`
 - Visit **http://localhost:8000/docs/api**  or **your_ip_address/docs/api** 
 
 ### Run test
