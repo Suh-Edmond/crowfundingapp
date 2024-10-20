@@ -22,7 +22,7 @@ This application allows people in need to receive money from anyone interested i
 ### How to Run Application
 You can run the application as a docker container using docker-compose, pull the base image from my hub, or run it as a normal laravel app. Either way works
 
-A #### Run app locally
+#### Run the app locally
 - Clone the project using the link, the latest code is on the *master* branch
 - Open it in your favourite IDE and run Composer install
 - Generate the app key by running `php artisan key: generate`
@@ -30,7 +30,7 @@ A #### Run app locally
 - Run the migration using the command `php artisan migrate`
 - Serve the application using `php artisan serve` and visit [localhost:8000/docs/api](API Documentation)
 
-B #### Run the app using docker-compose
+#### Run the app using docker-compose
 The docker setup provides the following services
 - Nginx
 - PHP 8.2 app
@@ -40,13 +40,13 @@ The docker setup provides the following services
 ##### Steps to install
 - Clone or download the project using the link, the latest code is on the *master* branch
 - Run `cp .env.example .env`
-- *** Provide your mail server configs in .env. Because all accounts created must be verified before a login can be successful, and you will not be able to access any protected endpoint without login.***
+*** Provide your mail server configs in .env. Because all accounts created must be verified before a login can be successful, and you will not be able to access any protected endpoint without login.***
   Please reach out to me if any issue
 - Run `docker-compose build`
 - Run `docker-compose up`
 - Visit [localhost/docs/api](API documentation) or [your_ip_address/docs/api](API documentation)
 
-C #### Run the app using the image
+#### Run the app using the image
 - Run `docker run -d -p 8000:80 suheddy/crowdfundapp:0.01`
 - Visit [localhost:8000/docs/api](API Documentation) or [your_ip_address/docs/api](API Documentation)
 
