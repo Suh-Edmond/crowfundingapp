@@ -1,6 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Auth\AuthenticationController;
+use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\DonationController;
+use App\Http\Controllers\UserDonationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +16,30 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::prefix('public/auth')->group(function () {
+    Route::post('/login', [AuthenticationController::class, 'loginUser'])->name('api.login');
+    Route::post('/create_account', [AuthenticationController::class, 'createAccount'])->name('api.createAccount');
+    Route::get('/email/verify/{id}/{hash}', [VerifyEmailController::class, '__invoke'])->middleware(['signed', 'throttle:6,1'])->name('verification.verify');
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+});
+Route::prefix('public')->group(function (){
+   Route::get('/donations', [DonationController::class, 'getAllDonations'])->name('api.getAllDonations');
+});
+
+Route::middleware(['auth:sanctum', 'verified'])->group( function () {
+     Route::prefix('protected')->group(function (){
+         Route::post('/auth/logout', [AuthenticationController::class, 'logout'])->name('api.logout');
+         Route::post('/email/verification-notification', [VerifyEmailController::class, 'resendVerification'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+     });
+
+
+    Route::prefix('protected')->group(function (){
+        Route::get('/user/donations', [DonationController::class, 'getUserDonations'])->name('api.getUserDonations');
+        Route::post('user/donations/create', [DonationController::class, 'createDonation'])->name('api.createDonation');
+        Route::get('/user/donations/{id}', [DonationController::class, 'showDonation'])->name('api.showDonation');
+        Route::put('/user/donations/{id}/update', [DonationController::class, 'updateDonation'])->name('api.updateDonation');
+        Route::post('/donations/add_contribute', [UserDonationController::class, 'addDonation'])->name('api.addDonation');
+        Route::get('/donations/{id}/contributions', [UserDonationController::class, 'getUserDonationsById'])->name('api.getUserDonationsById');
+    });
+
 });
