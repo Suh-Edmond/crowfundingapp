@@ -2,11 +2,6 @@
 
 cd /var/www
 
-#Install dependencies
-composer install
-
-composer dump-autoload
-
 # clear cache
 php artisan cache:clear
 

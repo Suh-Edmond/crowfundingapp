@@ -28,6 +28,13 @@ RUN useradd -u $uid -ms /bin/bash -g www-data $user
 
 COPY . /var/www
 
+WORKDIR /var/www
+
+#Install dependencies
+RUN composer install
+
+RUN composer dump-autoload
+
 COPY --chown=$user:www-data . /var/www
 
 USER $user
