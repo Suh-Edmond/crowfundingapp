@@ -35,3 +35,5 @@ USER $user
 EXPOSE 9000
 
 CMD ["php-fpm"]
+
+ENTRYPOINT ["/var/www/docker-compose/startup-commands/run.sh"]
