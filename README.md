@@ -23,8 +23,9 @@ This application allows people in need to receive money from anyone interested i
 You can run the application in two ways: as a Docker container using docker-compose, or as a standard Laravel application. Both methods are valid.
 
 #### Run the app locally
-- Clone the project using the link, the latest code is on the *master* branch
-- Open it in your favourite IDE and run Composer install
+- Clone or download the project using the link, the latest code is on the *master* branch
+- Open it in your favourite IDE and run `composer install`
+- Run `cp .env.example .env`
 - Generate the app key by running `php artisan key: generate`
 - Setup your database connection in your *.env* file
 - Run the migration using the command `php artisan migrate`
