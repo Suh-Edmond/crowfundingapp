@@ -30,7 +30,7 @@ class VerificationControllerTest extends TestCase
 
     public function test_resendVerification_should_resend_email(): void
     {
-        $response = $this->post('/api/public/auth/email/verification-notification');
+        $response = $this->post('/api/protected/email/verification-notification');
 
         $response->assertStatus(200);
     }
