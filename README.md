@@ -20,7 +20,7 @@ This application allows people in need to receive money from anyone interested i
 - MySQL
 
 ### How to Run Application
-You can run the application as a docker container using docker-compose, pull the base image from my hub, or run it as a normal laravel app. Either way works
+You can run the application in two ways: as a Docker container using docker-compose, or as a standard Laravel application. Both methods are valid.
 
 #### Run the app locally
 - Clone the project using the link, the latest code is on the *master* branch
@@ -32,8 +32,8 @@ You can run the application as a docker container using docker-compose, pull the
 
 #### Run the app using docker-compose
 The docker setup provides the following services
-- Nginx
-- PHP 8.2 app
+- Nginx:alpine
+- PHP 8.3-fpm
 - MySQL's latest version
 - PhpmyAdmin:5.2.1-apache
 
@@ -43,12 +43,7 @@ The docker setup provides the following services
 - ***Provide your mail server configs in .env.To access any protected endpoint, you must first verify your account. Please note that login will not be successful until your account is verified.***
 - Run `docker-compose build`
 - Run `docker-compose up`
-- Visit **http://localhost/docs/api** or **your_ip_address/docs/api** for the API documentation
-
-#### Run the app using the image
-This will pull the image start the container run the migrations and seed the database
-- Run `docker run -d -p 8000:80 suheddy/crowfundapp:0.01`
-- Visit **http://localhost:8000/docs/api**  or **your_ip_address/docs/api** 
+- Visit **http://localhost/docs/api** for the API documentation
 
 ### Run test
 - Run `php artisan test`
