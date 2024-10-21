@@ -25,9 +25,9 @@ class UserDonationSeeder extends Seeder
      */
     public function run(Generator $generator): void
     {
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             UserDonation::create([
-                'amount_given' => $generator->numberBetween([50000, 250000]),
+                'amount_given' => $generator->numberBetween([10000, 100000]),
                 'donation_id' => $generator->randomElement($this->donations),
                 'user_id'     => $generator->randomElement($this->users)
             ]);
