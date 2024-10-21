@@ -36,7 +36,6 @@ The docker setup provides the following services
 - Nginx:alpine
 - PHP 8.3-fpm
 - MySQL's latest version
-- PhpmyAdmin:5.2.1-apache
 
 ##### Steps to install
 - Clone or download the project using the link, the latest code is on the *master* branch
