@@ -35,6 +35,7 @@ You can run the application in two ways: as a Docker container using docker-comp
 The docker setup provides the following services
 - Nginx:alpine
 - PHP 8.3-fpm
+- PhpMyAdmin: 5.2.1-apache
 - MySQL's latest version
 
 ##### Steps to install
