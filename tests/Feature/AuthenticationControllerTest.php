@@ -31,8 +31,8 @@ class AuthenticationControllerTest extends TestCase
             'name' =>  'John Doe',
             'email' => 'johndoe@gmail.com',
             'telephone' => '678345167',
-            'password' => 'password',
-            'password_confirmation' => 'password'
+            'password' => 'Hfaufas34434!',
+            'password_confirmation' => 'Hfaufas34434!'
         ];
         $this->json('POST', 'api/public/auth/create_account', $userData, ['Accept' => 'application/json'])
             ->assertStatus(200)
