@@ -30,14 +30,12 @@ COPY . /var/www
 
 WORKDIR /var/www
 
-#Install dependencies
-RUN composer install
-
-RUN composer dump-autoload
-
 COPY --chown=$user:www-data . /var/www
 
 USER $user
+
+#Install dependencies
+RUN composer install --prefer-dist --no-scripts --no-dev --no-autoloader
 
 EXPOSE 9000
 
