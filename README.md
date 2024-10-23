@@ -47,4 +47,4 @@ The docker setup provides the following services
 - Visit **http://localhost/docs/api** for the API documentation
 
 ### Run test
-- Run `php artisan test`
+- `php artisan test`
