@@ -32,6 +32,13 @@ RUN mkdir -p /home/$user/.composer && \
 
 WORKDIR /var/www
 
+COPY . /var/www
+
+COPY --chown=$user:www-data . /var/www
+
+RUN chown -R $user:www-data /var/www/storage
+RUN chmod -R ug+w /var/www/storage
+
 USER $user
 
 EXPOSE 9000
