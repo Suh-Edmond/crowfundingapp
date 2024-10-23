@@ -44,6 +44,11 @@ The docker setup provides the following services
 - ***Provide your mail server configs in .env.To access any protected endpoint, you must first verify your account. Please note that login will not be successful until your account is verified.***
 - Run `docker-compose build`
 - Run `docker-compose up`
+- RUN `docker exec -it crowdfund_app_container bash`
+- RUN `composer install`
+- RUN `php artisan key:generate`
+- RUN `php artisan migrate`
+- RUN `php artisan db:seed`
 - Visit **http://localhost/docs/api** for the API documentation
 
 ### Run test
