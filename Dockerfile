@@ -32,7 +32,7 @@ RUN mkdir -p /home/$user/.composer && \
 
 WORKDIR /var/www
 
-COPY . /var/www
+COPY . .
 
 COPY --chown=$user:www-data . /var/www
 
