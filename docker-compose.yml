@@ -7,7 +7,7 @@ services:
         build:
             args:
                 user: ${{env.USER}}
-                uid: ${{ env.UID }}
+                uid: ${{env.UID}}
             context: .
             dockerfile: Dockerfile
         platform: linux/amd64
