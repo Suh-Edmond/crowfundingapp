@@ -6,8 +6,8 @@ services:
     crowdfund_app:
         build:
             args:
-                user: ${USER}
-                uid: ${UID}
+                user: ${{ env.USER }}
+                uid: ${{ env.UID }}
             context: .
             dockerfile: Dockerfile
         platform: linux/amd64
@@ -47,10 +47,10 @@ services:
         ports:
             - "3337:3306"
         environment:
-            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-            MYSQL_DATABASE: ${DB_DATABASE}
-            MYSQL_USER: ${DB_USER}
-            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${{ env.DB_PASSWORD }}
+            MYSQL_DATABASE: ${{ env.DB_DATABASE }}
+            MYSQL_USER: ${{ env.DB_USER }}
+            MYSQL_PASSWORD: ${{ env.DB_PASSWORD }}
         networks:
             - crowdfund_network
         volumes:
@@ -67,8 +67,8 @@ services:
         environment:
             PMA_HOST: crowdfund_mysql
             PMA_PORT: 3306
-            PMA_USER: ${PHP_MY_ADMIN_USER}
-            PMA_PASSWORD: ${DB_PASSWORD}
+            PMA_USER: ${{ env.PHP_MY_ADMIN_USER }}
+            PMA_PASSWORD: ${{ env.DB_PASSWORD }}
         depends_on:
             - crowdfund_mysql
         networks:
