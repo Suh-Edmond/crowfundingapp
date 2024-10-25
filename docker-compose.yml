@@ -67,7 +67,7 @@ services:
         environment:
             PMA_HOST: crowdfund_mysql
             PMA_PORT: 3306
-            PMA_USER: ${{ env.PHP_MY_ADMIN_USER }}
+            PMA_USER: ${{ env.DB_USER }}
             PMA_PASSWORD: ${{ env.DB_PASSWORD }}
         depends_on:
             - crowdfund_mysql
