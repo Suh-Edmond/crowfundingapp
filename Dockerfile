@@ -45,6 +45,6 @@ EXPOSE 9000
 
 CMD ["php-fpm"]
 
-RUN ["chmod", "+x", "var/www/docker-compose/startup-commands/run.sh"]
+RUN ["chmod", "+x", "/var/www/docker-compose/startup-commands/run.sh"]
 
 ENTRYPOINT ["/var/www/docker-compose/startup-commands/run.sh"]
