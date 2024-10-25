@@ -76,8 +76,8 @@ jobs:
       - name: Build and push Docker image
         id: build-docker-image
         run: |
-           docker compose build --tag ${{secrets.DOCKER_USERNAME}}/crowdfund_app:latest
+           docker compose build
       - name: push the docker image
         id: push-docker-image
-        run: docker push ${{secrets.DOCKER_USERNAME}}/crowdfund_app:latest
+        run: docker push
 
