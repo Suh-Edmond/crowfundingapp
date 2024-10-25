@@ -42,11 +42,9 @@ jobs:
     needs: laravel_tests
     name: Build docker image
     steps:
-      - uses: docker/setup-buildx-action@v1
+      - uses: actions/checkout@v2
       - name: Build the Docker image
         run: docker compose build
-        with:
-          file: ./Dockerfile
   test_image:
     needs: build_image
     name: Test docker image
