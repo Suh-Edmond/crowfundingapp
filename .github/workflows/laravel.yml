@@ -12,7 +12,7 @@ env:
 
 jobs:
   laravel-tests:
-    name: build_app_and_run_test
+    name: _build_app_and_run_test
     runs-on: ubuntu-latest
     steps:
       - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
@@ -40,7 +40,7 @@ jobs:
 
   build-and-push-image:
     runs-on: ubuntu-latest
-    needs: build_app_and_run_test
+    needs: _build_app_and_run_test
     name: build_docker_image_push_hub
     permissions:
       contents: read
