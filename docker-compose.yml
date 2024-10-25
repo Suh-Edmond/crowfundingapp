@@ -47,10 +47,10 @@ services:
         ports:
             - "3337:3306"
         environment:
-            MYSQL_ROOT_PASSWORD: ${env.DB_PASSWORD}
-            MYSQL_DATABASE: ${env.DB_DATABASE}
-            MYSQL_USER: ${env.DB_USER}
-            MYSQL_PASSWORD: ${env.DB_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${{env.DB_PASSWORD}}
+            MYSQL_DATABASE: ${{env.DB_DATABASE}}
+            MYSQL_USER: ${{env.DB_USER}}
+            MYSQL_PASSWORD: ${{env.DB_PASSWORD}}
         networks:
             - crowdfund_network
         volumes:
