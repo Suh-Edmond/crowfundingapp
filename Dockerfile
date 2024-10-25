@@ -47,4 +47,4 @@ CMD ["php-fpm"]
 
 RUN ["chmod", "+x", "/var/www/docker-compose/startup-commands/run.sh"]
 
-ENTRYPOINT ["/var/www/docker-compose/startup-commands/run.sh"]
+ENTRYPOINT ["sh", "/var/www/docker-compose/startup-commands/run.sh"]
