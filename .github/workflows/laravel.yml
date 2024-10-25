@@ -77,7 +77,12 @@ jobs:
         id: build-docker-image
         run: |
            docker compose build
+
+      - name: Tag images
+        run: |
+          docker tag crowdfund_app_image:latest ${{ secrets.DOCKER_USERNAME }}/crowdfund_app_image:${{ github.sha }}
+
       - name: push the docker image
         id: push-docker-image
-        run: docker push
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/crowdfund_app_image:${{ github.sha }}
 
