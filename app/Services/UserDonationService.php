@@ -7,7 +7,6 @@ use App\Constants\DonationStatus;
 use App\Exceptions\BusinessValidationException;
 use App\Exceptions\ResourceNotFoundException;
 use App\Http\Resources\UserDonationResourceCollection;
-use App\Http\Resources\UserDonationsResource;
 use App\interfaces\UserDonationInterface;
 use App\Models\Donation;
 use App\Models\UserDonation;
