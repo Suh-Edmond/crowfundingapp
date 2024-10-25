@@ -44,7 +44,7 @@ jobs:
     steps:
       - uses: docker/setup-buildx-action@v1
       - name: Build the Docker image
-        run: docker-compose build
+        run: docker compose build
   test_image:
     needs: build_image
     name: Test docker image
