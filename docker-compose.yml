@@ -6,8 +6,8 @@ services:
     crowdfund_app:
         build:
             args:
-                user: ${env.USER}
-                uid: ${env.UID}
+                user: ${{ env.USER }}
+                uid: ${{ env.UID }}
             context: .
             dockerfile: Dockerfile
         platform: linux/amd64
