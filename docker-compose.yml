@@ -6,9 +6,9 @@ services:
     crowdfund_app:
         build:
             args:
-                user: ${USER}
-                uid: ${UID}
-            context: ./
+                user: crowdfund_app_user
+                uid: 1000
+            context: .
             dockerfile: Dockerfile
         platform: linux/amd64
         image: crowdfund_app_image
