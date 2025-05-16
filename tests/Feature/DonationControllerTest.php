@@ -48,7 +48,7 @@ class DonationControllerTest extends TestCase
                   'estimated_amount' => ['The estimated amount field is required.'],
                   'deadline' => ["The deadline field is required."]
               ]
-          ]);
+        ]);
 
     }
 
